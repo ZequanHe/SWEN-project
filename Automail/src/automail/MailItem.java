@@ -9,9 +9,10 @@ import java.util.TreeMap;
  * Represents a mail item
  */
 public class MailItem {
-	
+
     /** Represents the destination floor to which the mail is intended to go */
     protected final int destination_floor;
+    private int current_floor;
     /** The mail identifier */
     protected final String id;
     /** The time the mail item arrived */
@@ -44,7 +45,21 @@ public class MailItem {
     public int getDestFloor() {
         return destination_floor;
     }
-    
+
+    /**
+     *
+     * @return the current floor of the mail item
+     */
+    public int getCurrentFloor(){ return current_floor; }
+
+    /**
+     *
+     * @param floor becomes the new current_floor value
+     */
+    public void updateCurrentFloor(int floor){
+        this.current_floor = floor;
+    }
+
     /**
      *
      * @return the ID of the mail item
@@ -62,21 +77,21 @@ public class MailItem {
     }
 
     /**
-    *
-    * @return the weight of the mail item
-    */
-   public int getWeight(){
-       return weight;
-   }
-   
-	static private int count = 0;
-	static private Map<Integer, Integer> hashMap = new TreeMap<Integer, Integer>();
+     *
+     * @return the weight of the mail item
+     */
+    public int getWeight(){
+        return weight;
+    }
 
-	@Override
-	public int hashCode() {
-		Integer hash0 = super.hashCode();
-		Integer hash = hashMap.get(hash0);
-		if (hash == null) { hash = count++; hashMap.put(hash0, hash); }
-		return hash;
-	}
+    static private int count = 0;
+    static private Map<Integer, Integer> hashMap = new TreeMap<Integer, Integer>();
+
+    @Override
+    public int hashCode() {
+        Integer hash0 = super.hashCode();
+        Integer hash = hashMap.get(hash0);
+        if (hash == null) { hash = count++; hashMap.put(hash0, hash); }
+        return hash;
+    }
 }
