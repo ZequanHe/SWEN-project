@@ -12,7 +12,9 @@ public class MailItem {
 
     /** Represents the destination floor to which the mail is intended to go */
     protected final int destination_floor;
-    private int current_floor;
+    private int starting_floor;
+
+    private double deliveryCost;
     /** The mail identifier */
     protected final String id;
     /** The time the mail item arrived */
@@ -35,7 +37,15 @@ public class MailItem {
 
     @Override
     public String toString(){
-        return String.format("Mail Item:: ID: %6s | Arrival: %4d | Destination: %2d | Weight: %4d", id, arrival_time, destination_floor, weight);
+        return String.format("Mail Item:: ID: %6s | Arrival: %4d | Destination: %2d | Weight: %4d | Cgarge: %.2f", id, arrival_time, destination_floor, weight, deliveryCost);
+    }
+
+    public double getDeliveryCost(){
+        return deliveryCost;
+    }
+
+    public void setDeliveryCost(double cost){
+        this.deliveryCost = cost;
     }
 
     /**
@@ -50,14 +60,14 @@ public class MailItem {
      *
      * @return the current floor of the mail item
      */
-    public int getCurrentFloor(){ return current_floor; }
+    public int getStartingFloor(){ return starting_floor; }
 
     /**
      *
      * @param floor becomes the new current_floor value
      */
-    public void updateCurrentFloor(int floor){
-        this.current_floor = floor;
+    public void updateStartingFloor(int floor){
+        this.starting_floor = floor;
     }
 
     /**
