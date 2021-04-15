@@ -9,10 +9,22 @@ public class price_cal {
     public MailItem mailitem;
     public WifiModem floor;
     public double activity_cost;
-    public price_cal(double activity_unit, double service_fee, MailItem mailitem) {
+    public double predict_cost;
+    public double count_up;
+    public price_cal(double activity_unit, double service_fee, MailItem mailitem, double count_up) {
         this.activity_unit = activity_unit;
         this.service_fee = service_fee;
         this.mailitem = mailitem;
+        this.predict_cost = 0;
+        this.count_up = count_up;
+    }
+
+    public void setPredict_cost(double predict_cost) {
+        this.predict_cost = predict_cost;
+    }
+
+    public double getCount_up() {
+        return count_up;
     }
 
     public void setActivity_unit(double activity_unit) {
@@ -32,14 +44,14 @@ public class price_cal {
     }
 
 
-
     public MailItem getMailitem() {
         return mailitem;
     }
 
-    public double Totalprice(MailItem mailitem){
-        return 0 ;
+    public double Totalprice(){
+        return ((activity_cost() + getService_fee()) * getCount_up()) ;
     }
+
     public double activity_cost(){
         activity_cost = getActivity_unit() *0.224;
         return activity_cost;
