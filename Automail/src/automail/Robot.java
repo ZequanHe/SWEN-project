@@ -60,7 +60,7 @@ public class Robot {
      * This is called on every time step
      * @throws ExcessiveDeliveryException if robot delivers more than the capacity of the tube without refilling
      */
-    public void operate() throws ExcessiveDeliveryException {   
+    public void operate() throws ExcessiveDeliveryException, Exception {
     	switch(current_state) {
     		/** This state is triggered when the robot is returning to the mailroom after a delivery */
     		case RETURNING:
@@ -131,7 +131,7 @@ public class Robot {
      * Set the starting floor of the mail to help calculate the work done on the price
      */
     public void updateMailStartFloor(int floor){
-        delivery.updateStartingFloor(floor);
+        deliveryItem.updateStartingFloor(floor);
     }
 
     /**

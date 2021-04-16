@@ -17,6 +17,7 @@ public class MailItem {
     private double activity;
     private double totalPrice;
     private double serviceFee;
+    private double cost;
     /** The mail identifier */
     protected final String id;
     /** The time the mail item arrived */
@@ -39,22 +40,20 @@ public class MailItem {
 
     @Override
     public String toString(){
-        return String.format("Mail Item:: ID: %6s | Arrival: %4d | Destination: %2d | Weight: %4d | Charge: %.2f", id, arrival_time, destination_floor, weight, deliveryCost);
+        return String.format("Mail Item:: ID: %6s | Arrival: %4d | Destination: %2d | Weight: %4d",
+                id, arrival_time, destination_floor, weight);
+    }
+    public String price_string(){
+        return String.format( "| Charge: %.2f| Cost: %.2f | Fee: %.2f | Activity : %.2f", totalPrice,cost,serviceFee,activity);
     }
 
-    public void sign(double activ, double total_price, double service){
+    public void sign(double activ, double total_price, double service, double cost){
         this.activity = activ;
         this.totalPrice = total_price;
         this.serviceFee = service;
+        this.cost = cost;
     }
 
-    public double getDeliveryCost(){
-        return deliveryCost;
-    }
-
-    public void setDeliveryCost(double cost){
-        this.deliveryCost = cost;
-    }
 
     /**
      *

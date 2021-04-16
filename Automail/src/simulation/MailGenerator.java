@@ -124,7 +124,7 @@ public class MailGenerator {
      * Given the clock time, put the generated mails into the mailPool.
      * So that the robot will can pick up the mails from the pool.
      */
-    public void addToMailPool(){
+    public void addToMailPool() throws Exception {
     	// Check if there are any mail to create
         if(this.allMail.containsKey(Clock.Time())){
             for(MailItem mailItem : allMail.get(Clock.Time())){

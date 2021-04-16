@@ -15,6 +15,7 @@ import com.unimelb.swen30006.wifimodem.WifiModem;
 import automail.Automail;
 import automail.MailItem;
 import automail.MailPool;
+import automail.price_cal;
 
 /**
  * This class simulates the behaviour of AutoMail
@@ -32,7 +33,7 @@ public class Simulation {
     private static double total_delay = 0;
     private static WifiModem wModem = null;
 
-    public static void main(String[] args) throws InstantiationException, IllegalAccessException, ClassNotFoundException, IOException {
+    public static void main(String[] args) throws Exception {
     	
     	/** Load properties for simulation based on either default or a properties file.**/
     	Properties automailProperties = setUpProperties();
@@ -73,7 +74,7 @@ public class Simulation {
          * This code section is for running a simulation
          */
         /* Instantiate MailPool and Automail */
-		Price_cal priceCalculator = new price_cal(0.224, 0.059);
+		price_cal priceCalculator = new price_cal(0.224, 0.059);
      	MailPool mailPool = new MailPool(NUM_ROBOTS, priceCalculator, CHARGE_THRESHOLD);
         Automail automail = new Automail(mailPool, new ReportDelivery(), NUM_ROBOTS, priceCalculator);
         MailGenerator mailGenerator = new MailGenerator(MAIL_TO_CREATE, MAIL_MAX_WEIGHT, mailPool, seedMap);
@@ -92,8 +93,10 @@ public class Simulation {
 				e.printStackTrace();
 				System.out.println("Simulation unable to complete.");
 				System.exit(0);
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
-            Clock.Tick();
+			Clock.Tick();
         }
         printResults();
         System.out.println(wModem.Turnoff());
@@ -151,7 +154,7 @@ public class Simulation {
     	public void deliver(MailItem deliveryItem){
     		if(!MAIL_DELIVERED.contains(deliveryItem)){
     			MAIL_DELIVERED.add(deliveryItem);
-                System.out.printf("T: %3d > Delivered(%4d) [%s]%n", Clock.Time(), MAIL_DELIVERED.size(), deliveryItem.toString());
+                System.out.printf("T: %3d > Delivered(%4d) [%s %s]%n", Clock.Time(), MAIL_DELIVERED.size(), deliveryItem.toString(), deliveryItem.price_string());
     			// Calculate delivery score
     			total_delay += calculateDeliveryDelay(deliveryItem);
     		}

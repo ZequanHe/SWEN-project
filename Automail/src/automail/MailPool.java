@@ -44,10 +44,11 @@ public class MailPool {
 	private price_cal calculator;
 	private double ExpressPrice;
 
-	public MailPool(int nrobots, Price_cal priceCalculator, double ExpressPrice){
+	public MailPool(int nrobots, price_cal priceCalculator, double ExpressPrice){
 		// Start empty
 		pool = new LinkedList<Item>();
 		robots = new LinkedList<Robot>();
+		expressPool = new LinkedList<Item>();
 		this.calculator = priceCalculator;
 		this.ExpressPrice = ExpressPrice;
 	}
@@ -58,7 +59,7 @@ public class MailPool {
 	 * Adds an item to the correct mail pool based on its price
 	 * @param mailItem the mail item being added.
 	 */
-	public void addPoolAction(MailItem mailItem){
+	public void addPoolAction(MailItem mailItem) throws Exception {
 		//This calls the correct method to put the mail item in the right mailpool based on its price
 		//calculated via the Price_cal class.
 
@@ -113,7 +114,7 @@ public class MailPool {
 				robot.addToHand(j.next().mailItem); // hand first as we want higher priority delivered first
 				j.remove();
 				robot.updateMailStartFloor(1);
-				if (ExpressPool.size() > 0) {
+				if (expressPool.size() > 0) {
 					robot.addToTube(j.next().mailItem);
 					j.remove();
 				}

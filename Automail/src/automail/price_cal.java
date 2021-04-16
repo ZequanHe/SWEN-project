@@ -2,6 +2,8 @@ package automail;
 
 import com.unimelb.swen30006.wifimodem.WifiModem;
 
+import static java.lang.Math.abs;
+
 public class price_cal {
 
     //public double activity_unit;
@@ -9,7 +11,7 @@ public class price_cal {
     protected final double LOOKUPACTIVITY = 0.1;
     private double markup;
     //public double service_fee;
-    //public MailItem mailitem;
+    public MailItem mailitem;
     public WifiModem floor;
     public double activity_cost;
     public double predict_cost;
@@ -23,15 +25,20 @@ public class price_cal {
         this.markup = markup;
     }
 
-    public void setPredict_cost(double predict_cost) {
-        this.predict_cost = predict_cost;
-    }
+  //  public void setPredict_cost(double predict_cost) {
+   //     this.predict_cost = predict_cost;
+  //  }
 
 
-    public void setActivity_unit(double activity_unit) {
-        this.activity_unit = activity_unit;
+ //   public void setActivity_unit(double activity_unit) {
+  //      this.activity_unit = activity_unit;
+  //  }
+
+    public double getMarkup() {
+        return markup;
     }
-/*
+
+    /*
     public void setService_fee(double service_fee) {
         this.service_fee = service_fee;
     }
@@ -50,14 +57,27 @@ public class price_cal {
     }
 */
 
-    public double Totalprice(){
+/*    public double Totalprice(){
         return ((activity_cost() + getService_fee()) * getCount_up()) ;
     }
-    public double cal_predict(MailItem mailitem){
-        return (((getfloor(mailitem) - 1) *5 + 0.1) * ppActivity + getService_fee()) * getCount_up();
+*/
+
+    public double cal_predict(MailItem mailitem) throws Exception {
+        int lookup = 0;
+        WifiModem floor = WifiModem.getInstance(getfloor(mailitem));
+        //Initialise lookup price to be negative
+        double lookupPrice = -1;
+        while (lookupPrice < 0){
+            lookupPrice = floor.forwardCallToAPI_LookupPrice(getfloor(mailitem));
+            lookup++;
+        }
+
+        return (((getfloor(mailitem) - 1) *FLOORMOVEACTIVITY + LOOKUPACTIVITY* lookup) *
+                ppActivity + lookupPrice) * getMarkup();
     }
-    public double activity_cost(){
-        activity_cost = getActivity_unit() *0.224;
+ //   public double activity_cost(double activity) {
+ //       activity_cost = activity * 0.224;
+ //   }
 
     /**
      *
@@ -106,16 +126,17 @@ public class price_cal {
         return abs(starting - destination);
     }
 
-    public double getfee(MailItem mailitem) throws Exception {
+/*    public double getfee(MailItem mailitem) throws Exception {
+
         floor = WifiModem.getInstance(getMailitem().destination_floor);
         return floor.forwardCallToAPI_LookupPrice(getMailitem().destination_floor);
     }
-
-    public void signMailPrice(mailitem){
+*/
+    public void signMailPrice(MailItem mailitem) throws Exception {
         int lookup = 0;
-        WifiModem floor = WidiModem.getInstance(getfloor(mailitem));
+        WifiModem floor = WifiModem.getInstance(getfloor(mailitem));
         //Initialise lookup price to be negative
-        int lookupPrice = -1;
+        double lookupPrice = -1;
         while (lookupPrice < 0){
             lookupPrice = floor.forwardCallToAPI_LookupPrice(getfloor(mailitem));
             lookup++;
@@ -125,7 +146,7 @@ public class price_cal {
         double activityCost = activity_cost(activity);
         double Cost = activityCost + lookupPrice;
         double totalCost = Cost*(1+markup);
-        mailitem.sign(activity, totalCost, lookupPrice);
+        mailitem.sign(activity, totalCost, lookupPrice, Cost);
 
     }
 }
