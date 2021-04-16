@@ -71,9 +71,11 @@ public class price_cal {
             lookupPrice = floor.forwardCallToAPI_LookupPrice(getfloor(mailitem));
             lookup++;
         }
-
-        return (((getfloor(mailitem) - 1) *FLOORMOVEACTIVITY + LOOKUPACTIVITY* lookup) *
-                ppActivity + lookupPrice) * getMarkup();
+        double activity = calc_activity(mailitem, lookup);
+        double activityCost = activity_cost(activity);
+        double Cost = activityCost + lookupPrice;
+        double totalCost = Cost*(1+markup);
+        return totalCost;
     }
  //   public double activity_cost(double activity) {
  //       activity_cost = activity * 0.224;

@@ -64,11 +64,13 @@ public class MailPool {
 		//calculated via the Price_cal class.
 
 		double mailFee = calculator.cal_predict(mailItem);
-
 		if (mailFee >= ExpressPrice){
 			addToExpressPool(mailItem);
+
+
 		}else{
 			addToPool(mailItem);
+
 		}
 
 	}
@@ -88,8 +90,8 @@ public class MailPool {
 	 */
 	public void addToExpressPool(MailItem mailItem) {
 		Item item = new Item(mailItem);
-		pool.add(item);
-		pool.sort(new ItemComparator());
+		expressPool.add(item);
+		expressPool.sort(new ItemComparator());
 	}
 	
 	
@@ -107,7 +109,8 @@ public class MailPool {
 	private void loadItem(ListIterator<Robot> i) throws ItemTooHeavyException {
 		Robot robot = i.next();
 		assert(robot.isEmpty());
-		// System.out.printf("P: %3d%n", pool.size());
+		//System.out.printf("P1: %3d%n", pool.size());
+		//System.out.printf("P2: %3d%n", expressPool.size());
 		if (expressPool.size() > 0) {
 			ListIterator<Item> j = expressPool.listIterator();
 			try {
