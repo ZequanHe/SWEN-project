@@ -53,13 +53,11 @@ public class price_cal {
     public double Totalprice(){
         return ((activity_cost() + getService_fee()) * getCount_up()) ;
     }
-<<<<<<< Updated upstream
     public double cal_predict(MailItem mailitem){
         return (((getfloor(mailitem) - 1) *5 + 0.1) * ppActivity + getService_fee()) * getCount_up();
     }
     public double activity_cost(){
         activity_cost = getActivity_unit() *0.224;
-=======
 
     /**
      *
@@ -79,7 +77,6 @@ public class price_cal {
     public double activity_cost(double activity){
 
         activity_cost = activity * ppActivity;
->>>>>>> Stashed changes
         return activity_cost;
     }
     /**
@@ -105,11 +102,9 @@ public class price_cal {
         int starting = mailStartingFloor(mailitem);
         int destination = getfloor(mailitem);
 
-<<<<<<< Updated upstream
-=======
+
         return abs(starting - destination);
     }
->>>>>>> Stashed changes
 
     public double getfee(MailItem mailitem) throws Exception {
         floor = WifiModem.getInstance(getMailitem().destination_floor);
