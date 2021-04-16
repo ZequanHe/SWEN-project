@@ -51,15 +51,14 @@ public class price_cal {
     public double Totalprice(){
         return ((activity_cost() + getService_fee()) * getCount_up()) ;
     }
-
+    public double cal_predict(){
+        return (((mailitem.destination_floor-1) *5 + 0.1) *0.224 + getService_fee()) * getCount_up();
+    }
     public double activity_cost(){
         activity_cost = getActivity_unit() *0.224;
         return activity_cost;
     }
 
-    public double getfloor(){
-        return mailitem.destination_floor;
-    }
 
     public double getfee(MailItem mailitem) throws Exception {
         floor = WifiModem.getInstance(getMailitem().destination_floor);
