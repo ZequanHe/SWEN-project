@@ -41,10 +41,10 @@ public class MailPool {
 	private LinkedList<Item> expressPool;
 	private LinkedList<Item> pool;
 	private LinkedList<Robot> robots;
-	private Price_cal calculator;
-	private int ExpressPrice;
+	private price_cal calculator;
+	private double ExpressPrice;
 
-	public MailPool(int nrobots, Price_cal priceCalculator, int ExpressPrice){
+	public MailPool(int nrobots, Price_cal priceCalculator, double ExpressPrice){
 		// Start empty
 		pool = new LinkedList<Item>();
 		robots = new LinkedList<Robot>();
@@ -62,7 +62,7 @@ public class MailPool {
 		//This calls the correct method to put the mail item in the right mailpool based on its price
 		//calculated via the Price_cal class.
 
-		double mailFee = calculator.total_charge(mailitem);
+		double mailFee = calculator.cal_predict(mailItem);
 
 		if (mailFee >= ExpressPrice){
 			addToExpressPool(mailItem);
@@ -107,8 +107,24 @@ public class MailPool {
 		Robot robot = i.next();
 		assert(robot.isEmpty());
 		// System.out.printf("P: %3d%n", pool.size());
-		ListIterator<Item> j = pool.listIterator();
-		if (pool.size() > 0) {
+		if (expressPool.size() > 0) {
+			ListIterator<Item> j = expressPool.listIterator();
+			try {
+				robot.addToHand(j.next().mailItem); // hand first as we want higher priority delivered first
+				j.remove();
+				robot.updateMailStartFloor(1);
+				if (ExpressPool.size() > 0) {
+					robot.addToTube(j.next().mailItem);
+					j.remove();
+				}
+				robot.dispatch(); // send the robot off if it has any items to deliver
+				i.remove();       // remove from mailPool queue
+			} catch (Exception e) {
+				throw e;
+			}
+		}
+		else if (pool.size() > 0) {
+			ListIterator<Item> j = pool.listIterator();
 			try {
 			robot.addToHand(j.next().mailItem); // hand first as we want higher priority delivered first
 			j.remove();

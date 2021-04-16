@@ -4,11 +4,11 @@ import simulation.IMailDelivery;
 
 public class Automail {
 
-    public Price_cal priceFinder;
+    public price_cal priceFinder;
     public Robot[] robots;
     public MailPool mailPool;
     
-    public Automail(MailPool mailPool, IMailDelivery delivery, int numRobots) {  	
+    public Automail(MailPool mailPool, IMailDelivery delivery, int numRobots, price_cal priceFinder) {
     	/** Initialize the MailPool */
     	
     	this.mailPool = mailPool;
@@ -17,7 +17,7 @@ public class Automail {
     	
     	/** Initialize robots */
     	robots = new Robot[numRobots];
-    	for (int i = 0; i < numRobots; i++) robots[i] = new Robot(delivery, mailPool, i);
+    	for (int i = 0; i < numRobots; i++) robots[i] = new Robot(delivery, mailPool, i, priceFinder);
     }
     
 }

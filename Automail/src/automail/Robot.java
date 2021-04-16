@@ -22,8 +22,7 @@ public class Robot {
     private int destination_floor;
     private MailPool mailPool;
     private boolean receivedDispatch;
-    private double deliveryCost;
-    private Price_cal calculator;
+    private price_cal calculator;
     
     private MailItem deliveryItem = null;
     private MailItem tube = null;
@@ -38,12 +37,12 @@ public class Robot {
      * @param delivery governs the final delivery
      * @param mailPool is the source of mail items
      */
-    public Robot(IMailDelivery delivery, MailPool mailPool, int number, Price_cal priceFinder){
+    public Robot(IMailDelivery delivery, MailPool mailPool, int number, price_cal priceFinder){
     	this.id = "R" + number;
         // current_state = RobotState.WAITING;
     	current_state = RobotState.RETURNING;
         current_floor = Building.MAILROOM_LOCATION;
-        this.Price_cal = priceFinder;
+        this.calculator = priceFinder;
         this.delivery = delivery;
         this.mailPool = mailPool;
         this.receivedDispatch = false;
@@ -93,8 +92,7 @@ public class Robot {
     			if(current_floor == destination_floor){ // If already here drop off either way
                     /** Delivery complete, report this to the simulator! */
                     //Price calculation should be put within this if statement
-                    deliveryCost = calculator.total_charge(deliveryItem);
-                    deliveryItem.setDeliveryCost(deliveryCost);
+                    calculator.signMailPrice(deliveryItem);
                     delivery.deliver(deliveryItem);
                     deliveryItem = null;
                     deliveryCounter++;

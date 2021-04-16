@@ -73,9 +73,9 @@ public class Simulation {
          * This code section is for running a simulation
          */
         /* Instantiate MailPool and Automail */
-		Price_cal priceCalculator = new Price_cal();
+		Price_cal priceCalculator = new price_cal(0.224, 0.059);
      	MailPool mailPool = new MailPool(NUM_ROBOTS, priceCalculator, CHARGE_THRESHOLD);
-        Automail automail = new Automail(mailPool, new ReportDelivery(), NUM_ROBOTS);
+        Automail automail = new Automail(mailPool, new ReportDelivery(), NUM_ROBOTS, priceCalculator);
         MailGenerator mailGenerator = new MailGenerator(MAIL_TO_CREATE, MAIL_MAX_WEIGHT, mailPool, seedMap);
         
         /** Generate all the mails */

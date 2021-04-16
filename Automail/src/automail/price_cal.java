@@ -8,20 +8,18 @@ public class price_cal {
     protected final double FLOORMOVEACTIVITY = 5;
     protected final double LOOKUPACTIVITY = 0.1;
     private double markup;
-    public double service_fee;
+    //public double service_fee;
     //public MailItem mailitem;
     public WifiModem floor;
     public double activity_cost;
     public double predict_cost;
-    public double count_up;
     private double ppActivity;
-    public price_cal(double ppActivity, double service_fee, double count_up, double markup) {
+    public price_cal(double ppActivity, double markup) {
         //this.activity_unit = activity_unit;
         this.ppActivity = ppActivity; //<----   Activity unit price
-        this.service_fee = service_fee;
+        //this.service_fee = service_fee;
         //this.mailitem = mailitem;
         this.predict_cost = 0;
-        this.count_up = count_up;
         this.markup = markup;
     }
 
@@ -29,26 +27,23 @@ public class price_cal {
         this.predict_cost = predict_cost;
     }
 
-    public double getCount_up() {
-        return count_up;
-    }
 
     public void setActivity_unit(double activity_unit) {
         this.activity_unit = activity_unit;
     }
-
+/*
     public void setService_fee(double service_fee) {
         this.service_fee = service_fee;
     }
 
-    /*public double getActivity_unit() {
+    public double getActivity_unit() {
         return activity_unit;
-    }*/
+    }
 
     public double getService_fee() {
         return service_fee;
     }
-
+ */
 /*
     public MailItem getMailitem() {
         return mailitem;
@@ -59,8 +54,8 @@ public class price_cal {
         return ((activity_cost() + getService_fee()) * getCount_up()) ;
     }
 <<<<<<< Updated upstream
-    public double cal_predict(){
-        return (((mailitem.destination_floor-1) *5 + 0.1) *0.224 + getService_fee()) * getCount_up();
+    public double cal_predict(MailItem mailitem){
+        return (((getfloor(mailitem) - 1) *5 + 0.1) * ppActivity + getService_fee()) * getCount_up();
     }
     public double activity_cost(){
         activity_cost = getActivity_unit() *0.224;
