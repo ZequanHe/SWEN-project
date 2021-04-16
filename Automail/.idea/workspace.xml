@@ -1,13 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f53c9bfc-5dd0-4437-8c63-ee11cea5e561" name="Default Changelist" comment="" />
+    <list default="true" id="f53c9bfc-5dd0-4437-8c63-ee11cea5e561" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
   <component name="ProjectId" id="1qkmldA4lR20hQqskbLYOUtVvdo" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
@@ -70,9 +76,10 @@
     </state>
     <state width="1878" height="249" key="GridCell.Tab.0.right/0.0.1440.900/-1920.0.1920.1080@-1920.0.1920.1080" timestamp="1617687298631" />
     <state width="1398" height="249" key="GridCell.Tab.0.right/0.0.1440.900/-1920.0.1920.1080@0.0.1440.900" timestamp="1617632721811" />
-    <state x="399" y="282" key="com.intellij.ide.util.TipDialog" timestamp="1617632117627">
-      <screen x="0" y="23" width="1440" height="806" />
+    <state x="399" y="289" key="com.intellij.ide.util.TipDialog" timestamp="1618559361990">
+      <screen x="0" y="0" width="1440" height="900" />
     </state>
+    <state x="399" y="289" key="com.intellij.ide.util.TipDialog/0.0.1440.900/-1920.0.1920.1080@0.0.1440.900" timestamp="1618559361990" />
     <state x="399" y="282" key="com.intellij.ide.util.TipDialog/0.23.1440.806/-1920.23.1920.1057@0.23.1440.806" timestamp="1617632117627" />
   </component>
 </project>
