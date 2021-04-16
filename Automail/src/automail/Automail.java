@@ -3,7 +3,8 @@ package automail;
 import simulation.IMailDelivery;
 
 public class Automail {
-	      
+
+    public Price_cal priceFinder;
     public Robot[] robots;
     public MailPool mailPool;
     
@@ -11,6 +12,8 @@ public class Automail {
     	/** Initialize the MailPool */
     	
     	this.mailPool = mailPool;
+
+    	this.priceFinder = priceFinder;
     	
     	/** Initialize robots */
     	robots = new Robot[numRobots];

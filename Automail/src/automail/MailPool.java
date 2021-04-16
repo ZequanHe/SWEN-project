@@ -37,21 +37,55 @@ public class MailPool {
 			return order;
 		}
 	}
-	
+
+	private LinkedList<Item> expressPool;
 	private LinkedList<Item> pool;
 	private LinkedList<Robot> robots;
+	private Price_cal calculator;
+	private int ExpressPrice;
 
-	public MailPool(int nrobots){
+	public MailPool(int nrobots, Price_cal priceCalculator, int ExpressPrice){
 		// Start empty
 		pool = new LinkedList<Item>();
 		robots = new LinkedList<Robot>();
+		this.calculator = priceCalculator;
+		this.ExpressPrice = ExpressPrice;
+	}
+
+
+
+	/**
+	 * Adds an item to the correct mail pool based on its price
+	 * @param mailItem the mail item being added.
+	 */
+	public void addPoolAction(MailItem mailItem){
+		//This calls the correct method to put the mail item in the right mailpool based on its price
+		//calculated via the Price_cal class.
+
+		double mailFee = calculator.total_charge(mailitem);
+
+		if (mailFee >= ExpressPrice){
+			addToExpressPool(mailItem);
+		}else{
+			addToPool(mailItem);
+		}
+
+	}
+	/**
+	 * Adds an item to the mail pool
+	 * @param mailItem the mail item being added.
+	 */
+	public void addToPool(MailItem mailItem) {
+		Item item = new Item(mailItem);
+		pool.add(item);
+		pool.sort(new ItemComparator());
 	}
 
 	/**
-     * Adds an item to the mail pool
-     * @param mailItem the mail item being added.
-     */
-	public void addToPool(MailItem mailItem) {
+	 * Adds an item to the Express mail pool
+	 * @param mailItem the mail item being added.
+	 */
+	public void addToExpressPool(MailItem mailItem) {
 		Item item = new Item(mailItem);
 		pool.add(item);
 		pool.sort(new ItemComparator());
@@ -78,6 +112,7 @@ public class MailPool {
 			try {
 			robot.addToHand(j.next().mailItem); // hand first as we want higher priority delivered first
 			j.remove();
+			robot.updateMailStartFloor(1);
 			if (pool.size() > 0) {
 				robot.addToTube(j.next().mailItem);
 				j.remove();

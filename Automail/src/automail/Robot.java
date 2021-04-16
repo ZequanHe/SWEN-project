@@ -22,6 +22,8 @@ public class Robot {
     private int destination_floor;
     private MailPool mailPool;
     private boolean receivedDispatch;
+    private double deliveryCost;
+    private Price_cal calculator;
     
     private MailItem deliveryItem = null;
     private MailItem tube = null;
@@ -36,11 +38,12 @@ public class Robot {
      * @param delivery governs the final delivery
      * @param mailPool is the source of mail items
      */
-    public Robot(IMailDelivery delivery, MailPool mailPool, int number){
+    public Robot(IMailDelivery delivery, MailPool mailPool, int number, Price_cal priceFinder){
     	this.id = "R" + number;
         // current_state = RobotState.WAITING;
     	current_state = RobotState.RETURNING;
         current_floor = Building.MAILROOM_LOCATION;
+        this.Price_cal = priceFinder;
         this.delivery = delivery;
         this.mailPool = mailPool;
         this.receivedDispatch = false;
@@ -89,6 +92,9 @@ public class Robot {
     		case DELIVERING:
     			if(current_floor == destination_floor){ // If already here drop off either way
                     /** Delivery complete, report this to the simulator! */
+                    //Price calculation should be put within this if statement
+                    deliveryCost = calculator.total_charge(deliveryItem);
+                    deliveryItem.setDeliveryCost(deliveryCost);
                     delivery.deliver(deliveryItem);
                     deliveryItem = null;
                     deliveryCounter++;
@@ -102,6 +108,7 @@ public class Robot {
                     else{
                         /** If there is another item, set the robot's route to the location to deliver the item */
                         deliveryItem = tube;
+                        updateMailStartFloor(current_floor);
                         tube = null;
                         setDestination();
                         changeState(RobotState.DELIVERING);
@@ -120,6 +127,13 @@ public class Robot {
     private void setDestination() {
         /** Set the destination floor */
         destination_floor = deliveryItem.getDestFloor();
+    }
+
+    /**
+     * Set the starting floor of the mail to help calculate the work done on the price
+     */
+    public void updateMailStartFloor(int floor){
+        delivery.updateStartingFloor(floor);
     }
 
     /**

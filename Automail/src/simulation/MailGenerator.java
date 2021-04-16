@@ -20,6 +20,7 @@ public class MailGenerator {
     
     private boolean complete;
     private MailPool mailPool;
+    private final int MAIL_ROOM_FLOOR = 0;
 
     private Map<Integer,ArrayList<MailItem>> allMail;
 
@@ -57,6 +58,7 @@ public class MailGenerator {
         int weight = generateWeight();
         
         newMailItem = new MailItem(destinationFloor,arrivalTime,weight);
+        newMailItem.updateStartingFloor(MAIL_ROOM_FLOOR);
         return newMailItem;
     }
 
@@ -127,7 +129,7 @@ public class MailGenerator {
         if(this.allMail.containsKey(Clock.Time())){
             for(MailItem mailItem : allMail.get(Clock.Time())){
                 System.out.printf("T: %3d > new addToPool [%s]%n", Clock.Time(), mailItem.toString());
-                mailPool.addToPool(mailItem);
+                mailPool.addPoolAction(mailItem);
             }
         }
     }
