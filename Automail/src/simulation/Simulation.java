@@ -198,6 +198,9 @@ public class Simulation {
 		System.out.println("Total Billable Activity: "+(calculator.getTotalActivityCost()+calculator.getTotalServiceCost())+" | Simulation complete!");
 		System.out.println("Total Activity Cost: "+calculator.getTotalActivityCost()+" | Simulation complete!");
 		System.out.println("Total Service Cost: "+calculator.getTotalServiceCost()+" | Simulation complete!");
+		System.out.println("Total Lookups: "+calculator.getLookupTry()+" | Simulation complete!");
+		System.out.println("Total Lookups success: "+calculator.getLookupPass()+" | Simulation complete!");
+		System.out.println("Total Lookups failed: "+calculator.getLookupFail()+" | Simulation complete!");
         System.out.printf("Delay: %.2f%n", total_delay);
     }
 }

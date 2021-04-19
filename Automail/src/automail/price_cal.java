@@ -7,6 +7,9 @@ import static java.lang.Math.abs;
 public class price_cal {
 
     //public double activity_unit;
+    private int lookupTry;
+    private int lookupPass;
+    private int lookupFail;
     private double totalActivity;
     private double totalActivityCost;
     private double totalServiceCost;
@@ -143,6 +146,7 @@ public class price_cal {
     }
 */
     public void signMailPrice(MailItem mailitem) throws Exception {
+
         int lookup = 0;
         WifiModem floor = WifiModem.getInstance(getfloor(mailitem));
         //Initialise lookup price to be negative
@@ -151,6 +155,9 @@ public class price_cal {
             lookupPrice = floor.forwardCallToAPI_LookupPrice(getfloor(mailitem));
             lookup++;
         }
+        lookupTry += lookup;
+        lookupFail += lookup - 1;
+        lookupPass += 1;
 
         double activity = calc_activity(mailitem, lookup);
         double activityCost = activity_cost(activity);
@@ -171,4 +178,8 @@ public class price_cal {
     public double getTotalActivity(){return totalActivity;}
 
     public double getTotalActivityCost(){return totalActivityCost;}
+
+    public int getLookupTry(){return lookupTry;}
+    public int getLookupPass(){return lookupPass;}
+    public int getLookupFail(){return lookupFail;}
 }
