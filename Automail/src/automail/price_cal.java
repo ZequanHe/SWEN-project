@@ -7,6 +7,10 @@ import static java.lang.Math.abs;
 public class price_cal {
 
     //public double activity_unit;
+    private double totalActivity;
+    private double totalActivityCost;
+    private double totalServiceCost;
+    private int totalDelivered;
     protected final double FLOORMOVEACTIVITY = 5;
     protected final double LOOKUPACTIVITY = 0.1;
     private double markup;
@@ -23,6 +27,10 @@ public class price_cal {
         //this.mailitem = mailitem;
         this.predict_cost = 0;
         this.markup = markup;
+        this.totalActivity = 0;
+        this.totalActivityCost = 0;
+        this.totalServiceCost = 0;
+        this.totalDelivered = 0;
     }
 
   //  public void setPredict_cost(double predict_cost) {
@@ -149,6 +157,18 @@ public class price_cal {
         double Cost = activityCost + lookupPrice;
         double totalCost = Cost*(1+markup);
         mailitem.sign(activity, totalCost, lookupPrice, Cost);
+        this.totalDelivered  += 1;
+        this.totalServiceCost += lookupPrice;
+        this.totalActivity += activity;
+        this.totalActivityCost += activityCost;
 
     }
+
+    public int getTotalDelivered(){return totalDelivered;}
+
+    public double getTotalServiceCost(){return totalServiceCost;}
+
+    public double getTotalActivity(){return totalActivity;}
+
+    public double getTotalActivityCost(){return totalActivityCost;}
 }

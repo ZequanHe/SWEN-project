@@ -100,7 +100,7 @@ public class Simulation {
 			}
 			Clock.Tick();
         }
-        printResults();
+        printResults(priceCalculator);
         System.out.println(wModem.Turnoff());
     }
     
@@ -191,9 +191,13 @@ public class Simulation {
         return Math.pow(Clock.Time() - deliveryItem.getArrivalTime(),penalty)*(1+Math.sqrt(priority_weight));
     }
 
-    public static void printResults(){
+    public static void printResults(price_cal calculator){
         System.out.println("T: "+Clock.Time()+" | Simulation complete!");
         System.out.println("Final Delivery time: "+Clock.Time());
+		System.out.println("Total Items Delivered: "+calculator.getTotalDelivered()+" | Simulation complete!");
+		System.out.println("Total Billable Activity: "+(calculator.getTotalActivityCost()+calculator.getTotalServiceCost())+" | Simulation complete!");
+		System.out.println("Total Activity Cost: "+calculator.getTotalActivityCost()+" | Simulation complete!");
+		System.out.println("Total Service Cost: "+calculator.getTotalServiceCost()+" | Simulation complete!");
         System.out.printf("Delay: %.2f%n", total_delay);
     }
 }
