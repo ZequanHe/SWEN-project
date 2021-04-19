@@ -154,7 +154,11 @@ public class Simulation {
     	public void deliver(MailItem deliveryItem){
     		if(!MAIL_DELIVERED.contains(deliveryItem)){
     			MAIL_DELIVERED.add(deliveryItem);
-                System.out.printf("T: %3d > Delivered(%4d) [%s %s]%n", Clock.Time(), MAIL_DELIVERED.size(), deliveryItem.toString(), deliveryItem.price_string());
+    			if (CHARGE_DISPLAY) {
+					System.out.printf("T: %3d > Delivered(%4d) [%s %s]%n", Clock.Time(), MAIL_DELIVERED.size(), deliveryItem.toString(), deliveryItem.price_string());
+				}else{
+					System.out.printf("T: %3d > Delivered(%4d) [%s]%n", Clock.Time(), MAIL_DELIVERED.size(), deliveryItem.toString());
+				}
     			// Calculate delivery score
     			total_delay += calculateDeliveryDelay(deliveryItem);
     		}
