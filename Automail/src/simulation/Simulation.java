@@ -101,7 +101,7 @@ public class Simulation {
 			Clock.Tick();
         }
         printResults(priceCalculator);
-        System.out.println(wModem.Turnoff());
+        // System.out.println(wModem.Turnoff());
     }
     
     static private Properties setUpProperties() throws IOException {
@@ -194,6 +194,7 @@ public class Simulation {
     public static void printResults(price_cal calculator){
         System.out.println("T: "+Clock.Time()+" | Simulation complete!");
         System.out.println("Final Delivery time: "+Clock.Time());
+		System.out.printf("Delay: %.2f%n", total_delay);
         if(CHARGE_DISPLAY) {
 			System.out.println("Total Items Delivered: " + calculator.getTotalDelivered());
 			System.out.println("Total Billable Activity: " + (calculator.getTotalActivityCost() + calculator.getTotalServiceCost()));
@@ -202,7 +203,7 @@ public class Simulation {
 			System.out.println("Total Lookups: " + calculator.getLookupTry());
 			System.out.println("Total Lookups success: " + calculator.getLookupPass());
 			System.out.println("Total Lookups failed: " + calculator.getLookupFail());
-			System.out.printf("Delay: %.2f%n", total_delay);
+
 		}
     }
 }
