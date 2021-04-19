@@ -24,6 +24,8 @@ public class Simulation {
 	private static int NUM_ROBOTS;
 	private static double CHARGE_THRESHOLD;
 	private static boolean CHARGE_DISPLAY;
+	private static double MARKUP;
+	private static double ACTIVITY_UNIT_PRICE;
 	
     /** Constant for the mail generator */
     private static int MAIL_TO_CREATE;
@@ -74,7 +76,7 @@ public class Simulation {
          * This code section is for running a simulation
          */
         /* Instantiate MailPool and Automail */
-		price_cal priceCalculator = new price_cal(0.224, 0.059);
+		price_cal priceCalculator = new price_cal(ACTIVITY_UNIT_PRICE, MARKUP);
      	MailPool mailPool = new MailPool(NUM_ROBOTS, priceCalculator, CHARGE_THRESHOLD);
         Automail automail = new Automail(mailPool, new ReportDelivery(), NUM_ROBOTS, priceCalculator);
         MailGenerator mailGenerator = new MailGenerator(MAIL_TO_CREATE, MAIL_MAX_WEIGHT, mailPool, seedMap);
@@ -110,6 +112,8 @@ public class Simulation {
     	automailProperties.setProperty("Mail_to_Create", "80");
     	automailProperties.setProperty("ChargeThreshold", "0");
     	automailProperties.setProperty("ChargeDisplay", "false");
+    	automailProperties.setProperty("Markup", "0.059");
+		automailProperties.setProperty("ActivityPrice", "0.224");
     	
     	// Read properties
 		FileReader inStream = null;
@@ -144,6 +148,12 @@ public class Simulation {
 		// Charge Display
 		CHARGE_DISPLAY = Boolean.parseBoolean(automailProperties.getProperty("ChargeDisplay"));
 		System.out.println("#Charge Display: " + CHARGE_DISPLAY);
+		//Markup
+		MARKUP = Double.parseDouble(automailProperties.getProperty("Markup"));
+		System.out.println("#Markup: " + MARKUP);
+		//Activity Unit Price
+		ACTIVITY_UNIT_PRICE = Double.parseDouble(automailProperties.getProperty("ActivityPrice"));
+		System.out.println("#ActivityPrice: " + ACTIVITY_UNIT_PRICE);
 		
 		return automailProperties;
     }
