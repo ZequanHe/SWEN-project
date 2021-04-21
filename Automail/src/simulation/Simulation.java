@@ -111,9 +111,9 @@ public class Simulation {
     	automailProperties.setProperty("Floors", "10");
     	automailProperties.setProperty("Mail_to_Create", "80");
     	automailProperties.setProperty("ChargeThreshold", "0");
-    	automailProperties.setProperty("ChargeDisplay", "false");
-    	automailProperties.setProperty("Markup", "0.059");
-		automailProperties.setProperty("ActivityPrice", "0.224");
+    	automailProperties.setProperty("CommercialDisplay", "false");
+    	automailProperties.setProperty("MarkupPercentage", "0.059");
+		automailProperties.setProperty("ActivityUnitPrice", "0.224");
     	
     	// Read properties
 		FileReader inStream = null;
@@ -146,14 +146,14 @@ public class Simulation {
 		CHARGE_THRESHOLD = Double.parseDouble(automailProperties.getProperty("ChargeThreshold"));
 		System.out.println("#Charge Threshold: " + CHARGE_THRESHOLD);
 		// Charge Display
-		CHARGE_DISPLAY = Boolean.parseBoolean(automailProperties.getProperty("ChargeDisplay"));
-		System.out.println("#Charge Display: " + CHARGE_DISPLAY);
+		CHARGE_DISPLAY = Boolean.parseBoolean(automailProperties.getProperty("CommercialDisplay"));
+		System.out.println("#Commercial Display: " + CHARGE_DISPLAY);
 		//Markup
-		MARKUP = Double.parseDouble(automailProperties.getProperty("Markup"));
-		System.out.println("#Markup: " + MARKUP);
+		MARKUP = Double.parseDouble(automailProperties.getProperty("MarkupPercentage"));
+		System.out.println("#MarkupPercentage: " + MARKUP);
 		//Activity Unit Price
-		ACTIVITY_UNIT_PRICE = Double.parseDouble(automailProperties.getProperty("ActivityPrice"));
-		System.out.println("#ActivityPrice: " + ACTIVITY_UNIT_PRICE);
+		ACTIVITY_UNIT_PRICE = Double.parseDouble(automailProperties.getProperty("ActivityUnitPrice"));
+		System.out.println("#ActivityUnitPrice: " + ACTIVITY_UNIT_PRICE);
 		
 		return automailProperties;
     }
