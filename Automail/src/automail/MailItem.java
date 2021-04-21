@@ -43,10 +43,22 @@ public class MailItem {
         return String.format("Mail Item:: ID: %6s | Arrival: %4d | Destination: %2d | Weight: %4d",
                 id, arrival_time, destination_floor, weight);
     }
+
+    /**
+     *
+     * @return print the cost information about a mailitem
+     */
     public String price_string(){
         return String.format( "| Charge: %.2f| Cost: %.2f | Fee: %.2f | Activity : %.2f", totalPrice,cost,serviceFee,activity);
     }
 
+    /**
+     * constructor a cost information for a Mailitem
+     * @param activ the total activity unit for this mail item
+     * @param total_price the total cost for this mail item with mark up
+     * @param service the service fee fot this mail tiem
+     * @param cost the total cost of the activity cost and service fee without mark up
+     */
     public void sign(double activ, double total_price, double service, double cost){
         this.activity = activ;
         this.totalPrice = total_price;

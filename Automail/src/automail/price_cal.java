@@ -6,7 +6,6 @@ import static java.lang.Math.abs;
 
 public class price_cal {
 
-    //public double activity_unit;
     private int lookupTry;
     private int lookupPass;
     private int lookupFail;
@@ -17,17 +16,11 @@ public class price_cal {
     protected final double FLOORMOVEACTIVITY = 5;
     protected final double LOOKUPACTIVITY = 0.1;
     private double markup;
-    //public double service_fee;
-    public MailItem mailitem;
-    public WifiModem floor;
     public double activity_cost;
     public double predict_cost;
     private double ppActivity;
     public price_cal(double ppActivity, double markup) {
-        //this.activity_unit = activity_unit;
         this.ppActivity = ppActivity; //<----   Activity unit price
-        //this.service_fee = service_fee;
-        //this.mailitem = mailitem;
         this.predict_cost = 0;
         this.markup = markup;
         this.totalActivity = 0;
@@ -36,42 +29,11 @@ public class price_cal {
         this.totalDelivered = 0;
     }
 
-  //  public void setPredict_cost(double predict_cost) {
-   //     this.predict_cost = predict_cost;
-  //  }
-
-
- //   public void setActivity_unit(double activity_unit) {
-  //      this.activity_unit = activity_unit;
-  //  }
 
     public double getMarkup() {
         return markup;
     }
 
-    /*
-    public void setService_fee(double service_fee) {
-        this.service_fee = service_fee;
-    }
-
-    public double getActivity_unit() {
-        return activity_unit;
-    }
-
-    public double getService_fee() {
-        return service_fee;
-    }
- */
-/*
-    public MailItem getMailitem() {
-        return mailitem;
-    }
-*/
-
-/*    public double Totalprice(){
-        return ((activity_cost() + getService_fee()) * getCount_up()) ;
-    }
-*/
 
     public double cal_predict(MailItem mailitem) throws Exception {
         int lookup = 0;
@@ -88,9 +50,6 @@ public class price_cal {
         double totalCost = Cost*(1+markup);
         return totalCost;
     }
- //   public double activity_cost(double activity) {
- //       activity_cost = activity * 0.224;
- //   }
 
     /**
      *
@@ -134,17 +93,15 @@ public class price_cal {
     private int deltaFloor(MailItem mailitem){
         int starting = mailStartingFloor(mailitem);
         int destination = getfloor(mailitem);
-
-
+        // make sure the result always positive
         return abs(starting - destination);
     }
 
-/*    public double getfee(MailItem mailitem) throws Exception {
-
-        floor = WifiModem.getInstance(getMailitem().destination_floor);
-        return floor.forwardCallToAPI_LookupPrice(getMailitem().destination_floor);
-    }
-*/
+    /**
+     *
+     * @param mailitem the mailitem information
+     * @throws Exception for the lookup service fee
+     */
     public void signMailPrice(MailItem mailitem) throws Exception {
 
         int lookup = 0;
@@ -171,15 +128,46 @@ public class price_cal {
 
     }
 
+    /**
+     *
+     * @return total number of mailitems are delivered
+     */
     public int getTotalDelivered(){return totalDelivered;}
 
+    /**
+     *
+     * @return sum of service fee for all mailitem
+     */
     public double getTotalServiceCost(){return totalServiceCost;}
+
+    /**
+     *
+     * @return the sum of activity unit for all mailitem
+     */
 
     public double getTotalActivity(){return totalActivity;}
 
+    /**
+     *
+     * @return sum of activity cost for all mailitem
+     */
     public double getTotalActivityCost(){return totalActivityCost;}
 
+    /**
+     *
+     * @return the number of time to lookup the service fee
+     */
     public int getLookupTry(){return lookupTry;}
+
+    /**
+     *
+     * @return the number of time to lookup the service fee success
+     */
     public int getLookupPass(){return lookupPass;}
+
+    /**
+     *
+     * @return the number of time to lookup the service fee fail
+     */
     public int getLookupFail(){return lookupFail;}
 }

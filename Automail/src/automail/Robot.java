@@ -36,7 +36,10 @@ public class Robot {
      * @param behaviour governs selection of mail items for delivery and behaviour on priority arrivals
      * @param delivery governs the final delivery
      * @param mailPool is the source of mail items
+     * @param number robot it
+     * @param priceFinder calculate the cost for a mailitem
      */
+
     public Robot(IMailDelivery delivery, MailPool mailPool, int number, price_cal priceFinder){
     	this.id = "R" + number;
         // current_state = RobotState.WAITING;

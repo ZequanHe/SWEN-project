@@ -192,9 +192,11 @@ public class Simulation {
     }
 
     public static void printResults(price_cal calculator){
+    	// print all the result after the Simulation complete
         System.out.println("T: "+Clock.Time()+" | Simulation complete!");
         System.out.println("Final Delivery time: "+Clock.Time());
 		System.out.printf("Delay: %.2f%n", total_delay);
+		// stats tracking will print out if the charge display on
         if(CHARGE_DISPLAY) {
 			System.out.println("Total Items Delivered: " + calculator.getTotalDelivered());
 			System.out.println("Total Billable Activity: " + (calculator.getTotalActivityCost() + calculator.getTotalServiceCost()));

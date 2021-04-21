@@ -66,8 +66,6 @@ public class MailPool {
 		double mailFee = calculator.cal_predict(mailItem);
 		if (mailFee >= ExpressPrice){
 			addToExpressPool(mailItem);
-
-
 		}else{
 			addToPool(mailItem);
 
