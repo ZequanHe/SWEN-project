@@ -150,10 +150,10 @@ public class Simulation {
 		System.out.println("#Commercial Display: " + CHARGE_DISPLAY);
 		//Markup
 		MARKUP = Double.parseDouble(automailProperties.getProperty("MarkupPercentage"));
-		System.out.println("#MarkupPercentage: " + MARKUP);
+		//System.out.println("#MarkupPercentage: " + MARKUP);
 		//Activity Unit Price
 		ACTIVITY_UNIT_PRICE = Double.parseDouble(automailProperties.getProperty("ActivityUnitPrice"));
-		System.out.println("#ActivityUnitPrice: " + ACTIVITY_UNIT_PRICE);
+		//System.out.println("#ActivityUnitPrice: " + ACTIVITY_UNIT_PRICE);
 		
 		return automailProperties;
     }
