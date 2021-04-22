@@ -196,13 +196,13 @@ public class Simulation {
         System.out.println("Final Delivery time: "+Clock.Time());
 		System.out.printf("Delay: %.2f%n", total_delay);
         if(CHARGE_DISPLAY) {
-			System.out.println("Total Items Delivered: " + calculator.getTotalDelivered());
-			System.out.println("Total Billable Activity: " + (calculator.getTotalActivityCost() + calculator.getTotalServiceCost()));
-			System.out.println("Total Activity Cost: " + calculator.getTotalActivityCost());
-			System.out.println("Total Service Cost: " + calculator.getTotalServiceCost());
-			System.out.println("Total Lookups: " + calculator.getLookupTry());
-			System.out.println("Total Lookups success: " + calculator.getLookupPass());
-			System.out.println("Total Lookups failed: " + calculator.getLookupFail());
+			System.out.printf("Total Items Delivered: %d\n", calculator.getTotalDelivered());
+			System.out.printf("Total Billable Activity: %f\n", (calculator.getTotalActivity()));
+			System.out.printf("Total Activity Cost: %.2f\n", calculator.getTotalActivityCost());
+			System.out.printf("Total Service Cost: %.2f\n", calculator.getTotalServiceCost());
+			System.out.printf("Total Lookups: %d\n", calculator.getLookupTry());
+			System.out.printf("Total Lookups success: %d\n", calculator.getLookupPass());
+			System.out.printf("Total Lookups failed %d\n", calculator.getLookupFail());
 
 		}
     }
