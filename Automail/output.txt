@@ -1,0 +1,16 @@
+Buildfile: C:\Users\ZEQUANH\Desktop\P1Validation-2\build.xml
+
+init:
+    [mkdir] Created dir: C:\Users\ZEQUANH\Desktop\P1Validation-2\tmp_unzipped\build
+
+compile:
+    [javac] C:\Users\ZEQUANH\Desktop\P1Validation-2\build.xml:32: warning: 'includeantruntime' was not set, defaulting to build.sysclasspath=last; set to false for repeatable builds
+    [javac] Compiling 13 source files to C:\Users\ZEQUANH\Desktop\P1Validation-2\tmp_unzipped\build
+
+dist:
+    [mkdir] Created dir: C:\Users\ZEQUANH\Desktop\P1Validation-2\tmp_unzipped\dist\lib
+      [jar] Building jar: C:\Users\ZEQUANH\Desktop\P1Validation-2\tmp_unzipped\dist\lib\Project1.jar
+
+BUILD SUCCESSFUL
+Total time: 0 seconds
+Default behaviour successful! 
