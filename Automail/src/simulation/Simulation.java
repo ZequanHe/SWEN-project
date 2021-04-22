@@ -147,13 +147,13 @@ public class Simulation {
 		System.out.println("#Charge Threshold: " + CHARGE_THRESHOLD);
 		// Charge Display
 		CHARGE_DISPLAY = Boolean.parseBoolean(automailProperties.getProperty("CommercialDisplay"));
-		System.out.println("#Commercial Display: " + CHARGE_DISPLAY);
+		System.out.println("#Charge Display: " + CHARGE_DISPLAY);
 		//Markup
 		MARKUP = Double.parseDouble(automailProperties.getProperty("MarkupPercentage"));
-		//System.out.println("#MarkupPercentage: " + MARKUP);
+		//System.out.println("#Markup: " + MARKUP);
 		//Activity Unit Price
 		ACTIVITY_UNIT_PRICE = Double.parseDouble(automailProperties.getProperty("ActivityUnitPrice"));
-		//System.out.println("#ActivityUnitPrice: " + ACTIVITY_UNIT_PRICE);
+		//System.out.println("#ActivityPrice: " + ACTIVITY_UNIT_PRICE);
 		
 		return automailProperties;
     }
@@ -192,11 +192,9 @@ public class Simulation {
     }
 
     public static void printResults(price_cal calculator){
-    	// print all the result after the Simulation complete
         System.out.println("T: "+Clock.Time()+" | Simulation complete!");
         System.out.println("Final Delivery time: "+Clock.Time());
 		System.out.printf("Delay: %.2f%n", total_delay);
-		// stats tracking will print out if the charge display on
         if(CHARGE_DISPLAY) {
 			System.out.println("Total Items Delivered: " + calculator.getTotalDelivered());
 			System.out.println("Total Billable Activity: " + (calculator.getTotalActivityCost() + calculator.getTotalServiceCost()));
